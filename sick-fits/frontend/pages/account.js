@@ -1,7 +1,7 @@
 export default function account() {
   return (
     <div>
-      <p>Sell Page</p>
+      <p>Account Page</p>
     </div>
   );
 }
