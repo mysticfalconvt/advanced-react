@@ -1,4 +1,3 @@
-import { de } from "date-fns/locale";
 import Link from "next/link";
 
 export default function Nav() {
