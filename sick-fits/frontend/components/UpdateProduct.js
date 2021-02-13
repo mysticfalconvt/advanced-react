@@ -46,7 +46,7 @@ export default function UpdateProduct({ id }) {
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
   // 2.5 Create some state for the form inputs:
   const { inputs, handleChange, clearForm, resetForm } = useForm(data?.Product);
-  console.log(inputs);
+  //   console.log(inputs);
   if (loading) return <p>loading...</p>;
   // 3. We need the form to handle the updates
   return (
@@ -61,15 +61,6 @@ export default function UpdateProduct({ id }) {
             price: inputs.price,
           },
         }).catch(console.error);
-        console.log(res);
-        // Submit the inputfields to the backend:
-        // TODO: Handle Submit!!!
-        // const res = await createProduct();
-        // clearForm();
-        // // Go to that product's page!
-        // Router.push({
-        //   pathname: `/product/${res.data.createProduct.id}`,
-        // });
       }}
     >
       <DisplayError error={error || updateError} />
