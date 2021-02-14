@@ -23,11 +23,11 @@ const { withAuth } = createAuth({
       fields: ['name', 'email', 'password']
       //todo add data seeding here
     },
-    passwordResetLink:{
-      async sendToken(args){
+    passwordResetLink: {
+      async sendToken(args) {
         console.log(args);
-      }
-    }
+      },
+    },
   });
 
 export default withAuth(config({
