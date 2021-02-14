@@ -22,6 +22,11 @@ const { withAuth } = createAuth({
     initFirstItem: {
       fields: ['name', 'email', 'password']
       //todo add data seeding here
+    },
+    passwordResetLink:{
+      async sendToken(args){
+        console.log(args);
+      }
     }
   });
 

@@ -1,5 +1,5 @@
-import { mergeDeep } from "@apollo/client/utilities";
-import { PAGINATION_QUERY } from "../components/Pagination";
+import { mergeDeep } from '@apollo/client/utilities';
+import { PAGINATION_QUERY } from '../components/Pagination';
 
 export default function paginationField() {
   return {
