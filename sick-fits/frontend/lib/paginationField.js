@@ -5,7 +5,7 @@ export default function paginationField() {
   return {
     keyArgs: false,
     read(existing = [], { args, cache }) {
-      console.log(existing, args, cache);
+      // console.log(existing, args, cache);
       const { skip, first } = args;
       // first it asks read function for the items
       const data = cache.readQuery({ query: PAGINATION_QUERY });
@@ -26,9 +26,9 @@ export default function paginationField() {
 
       // if there are items just return them
       if (items.length) {
-        console.log(
-          `there are ${items.length} items in cache!! Gonna send them to appolo`,
-        );
+        // console.log(
+        //   `there are ${items.length} items in cache!! Gonna send them to appolo`,
+        // );
         return items;
       }
       return false;
@@ -38,13 +38,13 @@ export default function paginationField() {
     },
     merge(existing, incoming, { args }) {
       // this runs when teh appolo client comes back from teh network with the products
-      console.log(`merging items from the network ${incoming.length}`);
+      // console.log(`merging items from the network ${incoming.length}`);
       const { skip, first } = args;
       const merged = existing ? existing.slice(0) : [];
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log(merged);
+      // console.log(merged);
       // return merged items from cache
       return merged;
     },
