@@ -8,6 +8,7 @@ import {createAuth} from '@keystone-next/auth'
 import {withItemData, statelessSessions} from '@keystone-next/keystone/session'
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
+import { extendGraphqlSchema } from './mutations';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -52,6 +53,7 @@ export default withAuth(config({
       }
     },
   },
+  extendGraphqlSchema: extendGraphqlSchema,
   lists: createSchema({
     // Schema items go in here
     User,
