@@ -35,7 +35,6 @@ export default function Search() {
   resetIdCounter();
   const items = data?.searchTerms || [];
   const findItemsButChill = debounce(findItems, 350);
-  console.log(data);
   const {
     isOpen,
     inputValue,
