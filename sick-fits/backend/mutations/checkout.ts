@@ -72,6 +72,8 @@ async function checkout(
       console.log(err);
       throw new Error(err.message);
     });
+
+  console.log(charge);
   //4. Convert the cart items to order items
 
   //5. Create teh order and return it.
