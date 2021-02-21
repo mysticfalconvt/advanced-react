@@ -3,6 +3,8 @@ import 'dotenv/config';
 import {User} from './schemas/User'
 import {Product} from './schemas/Product'
 import {CartItem} from './schemas/CartItem'
+import {OrderItem} from './schemas/OrderItem'
+import {Order} from './schemas/Order'
 import {ProductImage} from './schemas/ProductImage'
 import {createAuth} from '@keystone-next/auth'
 import {withItemData, statelessSessions} from '@keystone-next/keystone/session'
@@ -60,6 +62,8 @@ export default withAuth(config({
     Product,
     ProductImage,
     CartItem,
+    OrderItem,
+    Order
   }),
   ui: {
     // show UI for people who passs the test
