@@ -52,6 +52,7 @@ function CheckoutForm() {
     e.preventDefault();
     console.log('Get to work!!');
     // 2. start teh page transition
+    setLoading(true);
     nProgress.start();
     // 3. create payment methid from stripe (token comes back hereif successful)
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -87,7 +88,7 @@ function CheckoutForm() {
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
       {graphQlError && <p style={{ fontSize: 12 }}>{graphQlError.message}</p>}
       <CardElement />
-      <SickButton>Check Out Now</SickButton>
+      <SickButton>{!loading ? 'Check Out Now' : 'Checking Out'}</SickButton>
     </CheckoutFormStyles>
   );
 }
