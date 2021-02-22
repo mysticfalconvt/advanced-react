@@ -17,6 +17,10 @@ export const User = list({
       },
     }),
     orders: relationship({ ref: 'Order.user', many: true }),
+    role: relationship({
+      ref: 'Role.assignedTo',
+      // todo Add Access Control
+    }),
     // TODO, add roles,
   },
 });
