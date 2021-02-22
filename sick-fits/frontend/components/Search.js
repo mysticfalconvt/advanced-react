@@ -5,8 +5,8 @@ import debounce from 'lodash.debounce';
 import { useRouter } from 'next/dist/client/router';
 import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 
-const SEARCH_PRODUCT_QUERY = gql`
-  query SEARCH_PRODUCT_QUERY($searchTerm: String!) {
+const SEARCH_PRODUCTS_QUERY = gql`
+  query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
     searchTerms: allProducts(
       where: {
         OR: [
@@ -28,30 +28,38 @@ const SEARCH_PRODUCT_QUERY = gql`
 
 export default function Search() {
   const router = useRouter();
-  const [
-    findItems,
-    { loading, data, error },
-  ] = useLazyQuery(SEARCH_PRODUCT_QUERY, { fetchPolicy: 'no-cache' });
-  resetIdCounter();
+  const [findItems, { loading, data, error }] = useLazyQuery(
+    SEARCH_PRODUCTS_QUERY,
+    {
+      fetchPolicy: 'no-cache',
+    },
+  );
   const items = data?.searchTerms || [];
   const findItemsButChill = debounce(findItems, 350);
+  resetIdCounter();
   const {
     isOpen,
     inputValue,
-    getItemProps,
     getMenuProps,
     getInputProps,
     getComboboxProps,
+    getItemProps,
     highlightedIndex,
   } = useCombobox({
     items,
     onInputValueChange() {
-      findItemsButChill({ variables: { searchTerm: inputValue } });
+      findItemsButChill({
+        variables: {
+          searchTerm: inputValue,
+        },
+      });
     },
     onSelectedItemChange({ selectedItem }) {
-      router.push({ pathname: `/product/${selectedItem.id}` });
+      router.push({
+        pathname: `/product/${selectedItem.id}`,
+      });
     },
-    itemToString: (item) => (item === null ? '' : item.name),
+    itemToString: (item) => item?.name || '',
   });
   return (
     <SearchStyles>
@@ -61,7 +69,7 @@ export default function Search() {
             type: 'search',
             placeholder: 'Search for an Item',
             id: 'search',
-            className: 'loading',
+            className: loading ? 'loading' : '',
           })}
         />
       </div>
@@ -69,8 +77,8 @@ export default function Search() {
         {isOpen &&
           items.map((item, index) => (
             <DropDownItem
-              key={item.id}
               {...getItemProps({ item })}
+              key={item.id}
               highlighted={index === highlightedIndex}
             >
               <img
